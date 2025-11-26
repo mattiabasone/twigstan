@@ -11,8 +11,6 @@ use Symfony\Component\Filesystem\Filesystem;
  * File reading utility to bypass missing methods in certain Filesystem implementations for older Symfony versions.
  * Filesystem::readFile was introduced in Symfony 7.1.
  * https://symfony.com/doc/current/components/filesystem.html#readfile
- *
- * @internal
  */
 final class FileReader
 {
