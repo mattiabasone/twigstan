@@ -18,7 +18,7 @@ jobs:
                 php: [ '8.3', '8.4' ]
                 twig: [ 3 ]
                 dependency-version: ['lowest', 'highest']
-        name: Tests with PHP ${{ matrix.php }}, Composer dependency version ${{ matrix.dependency-version }}, Twig ${{ matrix.twig }} on ${{ matrix.operating-system }}
+        name: Tests with PHP ${{ matrix.php }}, dependency version ${{ matrix.dependency-version }}, Twig ${{ matrix.twig }} on ${{ matrix.operating-system }}
         steps:
             -   name: Checkout
                 uses: actions/checkout@v4
@@ -85,7 +85,8 @@ jobs:
             matrix:
                 operating-system: [ ubuntu-latest ]
                 php: [ '8.3', '8.4' ]
-        name: PHPStan with ${{ matrix.php }} on ${{ matrix.operating-system }}
+                dependency-version: ['lowest', 'highest']
+        name: PHPStan with ${{ matrix.php }}, dependency version ${{ matrix.dependency-version }}, on ${{ matrix.operating-system }}
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v4
@@ -99,6 +100,8 @@ jobs:
 
             -   name: Install Composer packages
                 uses: ramsey/composer-install@v3
+                with:
+                    dependency-versions: ${{ matrix.dependency-version }}
 
             -   name: Install Composer packages
                 uses: ramsey/composer-install@v3
@@ -113,7 +116,6 @@ jobs:
             matrix:
                 operating-system: [ ubuntu-latest ]
                 php: [ '8.3', '8.4' ]
-                dependency-version: ['lowest', 'highest']
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v4
@@ -127,8 +129,6 @@ jobs:
 
             -   name: Install Composer packages
                 uses: ramsey/composer-install@v3
-                with:
-                    dependency-versions: ${{ matrix.dependency-version }}
 
             -   name: Normalize Composer file
                 run: castor composer-normalize
