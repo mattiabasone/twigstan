@@ -33,6 +33,7 @@ jobs:
             -   name: Install Composer packages
                 uses: ramsey/composer-install@v3
                 with:
+                    custom-cache-key: "php-${{ matrix.php }}-${{ matrix.dependency-version }}-${{ hashFiles('**/composer.lock') }}"
                     dependency-versions: ${{ matrix.dependency-version }}
 
             -   name: Setup Twig 4
@@ -101,6 +102,7 @@ jobs:
             -   name: Install Composer packages
                 uses: ramsey/composer-install@v3
                 with:
+                    custom-cache-key: "php-${{ matrix.php }}-${{ matrix.dependency-version }}-${{ hashFiles('**/composer.lock') }}"
                     dependency-versions: ${{ matrix.dependency-version }}
 
             -   name: Install Composer packages
